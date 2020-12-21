@@ -12,7 +12,9 @@ function displayParticipantNames(participantNames) {
     input.id = element;
     input.name = "participant";
     input.value = element;
-    input.checked = true;
+    if (element !== "Mahesh") {
+      input.checked = true;
+    }
     nameDiv.appendChild(input);
     let label = document.createElement('label');
     label.htmlFor = element;
@@ -32,16 +34,33 @@ function displayParticipantNames(participantNames) {
   leftColDiv.appendChild(nextButtonDiv);
 }
 
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+  // While there are elements to shuffle
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 function assignNextTurn() {
   const teammates = document.getElementsByName("participant");
+  let teammatesShuffled = Array.from(teammates);
+  shuffle(teammatesShuffled);
   const rightColumnDiv = document.getElementById("h3");
-  for (let i = 0; i < teammates.length; ++i) {
-    const teammate = teammates[i];
+  for (let i = 0; i < teammatesShuffled.length; ++i) {
+    const teammate = teammatesShuffled[i];
     if (teammate.checked === true) {
       rightColumnDiv.innerText = teammate.value;
       const teammateDiv = document.getElementById(teammate.id + "Div");
-      teammateDiv.style = 'background-color:#b2b2b2;';
+      teammateDiv.style = 'color:#b2b2b2;';
       teammate.checked = false;
+      break;
     }
   }
 }
