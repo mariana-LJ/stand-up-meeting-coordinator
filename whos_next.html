@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap.css">
   <title>Who's Next</title>
   <style>
-    .column{
-      float: left;
-      width: 50%;
+    #footer {
+      max-height:100%;
+      max-width:100%;
     }
   </style>
 </head>
 
 <body>
-  <div id="leftColumn" class="column">  
-  </div>
-
-  <div class="column">
-    <h3 id="h3"></h3>
+  <div class="container">
+    <div class="row justify-content-center">
+      <h1>Happy New Year!</h1>
+    </div>
+    <div class="row align-items-center">
+      <div id="leftColumn" class="col">
+      </div>
+      <div id="centerColumn" class="col">
+      </div>
+      <div class="col">
+        <h3 id="h3" class="alert alert-primary">?</h3>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <img id="footer" src="footer.png">
+    </div>
   </div>
   <script src="whos_next.js"></script>
 </body>
+
 </html>

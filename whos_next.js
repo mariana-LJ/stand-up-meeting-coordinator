@@ -20,10 +20,10 @@ function displayParticipantNames(participantNames) {
       nameDiv.style = 'color:#b2b2b2;';
     }
 
-    input.addEventListener('click', function() {
+    input.addEventListener('click', function () {
       changeParticipantsFontColor(input);
     })
-    
+
     nameDiv.appendChild(input);
     let label = document.createElement('label');
     label.htmlFor = element;
@@ -36,11 +36,12 @@ function displayParticipantNames(participantNames) {
   let nextButtonDiv = document.createElement('div');
   nextButtonDiv.id = "nextButton";
   let nextButton = document.createElement('button');
+  nextButton.classList.add('btn', 'btn-primary')
   nextButton.onclick = assignNextTurn;
   let nextButtonText = document.createTextNode('Next');
   nextButton.appendChild(nextButtonText);
   nextButtonDiv.appendChild(nextButton);
-  leftColDiv.appendChild(nextButtonDiv);
+  document.getElementById("centerColumn").appendChild(nextButtonDiv);
 }
 
 function shuffle(array) {
