@@ -44,20 +44,6 @@ function displayParticipantNames(participantNames) {
   document.getElementById("centerColumn").appendChild(nextButtonDiv);
 }
 
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
-  // While there are elements to shuffle
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
 function changeParticipantsFontColor(participant) {
   const participantDiv = document.getElementById(participant.id + "Div");
   if (participant.checked === true) {
@@ -68,20 +54,16 @@ function changeParticipantsFontColor(participant) {
 }
 
 function assignNextTurn() {
-  const teammates = document.getElementsByName("participant");
-  let teammatesShuffled = Array.from(teammates);
-  shuffle(teammatesShuffled);
+  const elements = document.getElementsByName("participant");
+  const teammates = [...elements].filter(t => t.disabled === false && t.checked === true);
+  if (teammates.length === 0) return;
+  const i = Math.floor(Math.random() * teammates.length);
+  const teammate = teammates[i];
   const rightColumnDiv = document.getElementById("h3");
-  for (let i = 0; i < teammatesShuffled.length; ++i) {
-    const teammate = teammatesShuffled[i];
-    if (teammate.disabled === false && teammate.checked === true) {
-      rightColumnDiv.innerText = teammate.value;
-      const teammateDiv = document.getElementById(teammate.id + "Div");
-      teammateDiv.style = 'color:#b2b2b2;';
-      teammate.disabled = true;
-      break;
-    }
-  }
+  rightColumnDiv.innerText = teammate.value;
+  const teammateDiv = document.getElementById(teammate.id + "Div");
+  teammateDiv.style = 'color:#b2b2b2;';
+  teammate.disabled = true;
 }
 
 displayParticipantNames(participants);
