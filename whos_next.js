@@ -15,7 +15,7 @@ function displayParticipantNames(participantNames) {
     const TUESDAY = 2;
     const THURSDAY = 4;
     const date = new Date();
-    const today = 4;//date.getDay();
+    const today = date.getDay();
     if ((today !== THURSDAY && input.value === "Mahesh") || (today === TUESDAY && input.value === "Victoria")) {
       input.checked = false;
       input.disabled = true;
