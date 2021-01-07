@@ -18,7 +18,6 @@ function displayParticipantNames(participantNames) {
     const today = date.getDay();
     if ((today !== THURSDAY && input.value === "Mahesh") || (today === TUESDAY && input.value === "Victoria")) {
       input.checked = false;
-      input.disabled = true;
       nameDiv.style = 'color:#b2b2b2;';
     } else {
       input.checked = true;
@@ -61,11 +60,15 @@ function changeParticipantsFontColor(participant) {
 function assignNextTurn() {
   const elements = document.getElementsByName("participant");
   const teammates = [...elements].filter(t => t.disabled === false && t.checked === true);
-  console.log(teammates.length);
+  const isMaheshPresent = teammates.filter(t => t.value === "Mahesh").length > 0;
   let teammate = "";
   if (teammates.length === 0) return;
   if (teammates.length > 1) {
-    const i = Math.floor(Math.random() * (teammates.length - 1));
+    let numParticipants = teammates.length;
+    if (isMaheshPresent) {
+      numParticipants -= 1;
+    }
+    const i = Math.floor(Math.random() * numParticipants);
     teammate = teammates[i];
   }
   if (teammates.length === 1) {
@@ -78,7 +81,6 @@ function assignNextTurn() {
   teammate.disabled = true;
   if (teammates.length === 1) {
     let nextButton = document.getElementById("Next");
-    console.log(nextButton)
     nextButton.classList.replace('btn-primary', 'btn-secondary');
     nextButton.disabled = true;
   }
