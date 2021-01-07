@@ -1,6 +1,6 @@
 'use strict'
 
-let participants = ["Asaf", "Mahesh", "Mariana", "Rachel", "Todd", "Victoria", "Vineet"];
+let participants = ["Asaf", "Mariana", "Rachel", "Todd", "Victoria", "Vineet", "Mahesh"];
 
 function displayParticipantNames(participantNames) {
   let leftColDiv = document.getElementById("leftColumn");
@@ -12,12 +12,16 @@ function displayParticipantNames(participantNames) {
     input.id = element;
     input.name = "participant";
     input.value = element;
-    if (input.value !== "Mahesh") {
-      input.checked = true;
-    }
-    if (input.value === "Mahesh") {
+    const TUESDAY = 2;
+    const THURSDAY = 4;
+    const date = new Date();
+    const today = 4;//date.getDay();
+    if ((today !== THURSDAY && input.value === "Mahesh") || (today === TUESDAY && input.value === "Victoria")) {
+      input.checked = false;
       input.disabled = true;
       nameDiv.style = 'color:#b2b2b2;';
+    } else {
+      input.checked = true;
     }
 
     input.addEventListener('click', function () {
@@ -36,7 +40,8 @@ function displayParticipantNames(participantNames) {
   let nextButtonDiv = document.createElement('div');
   nextButtonDiv.id = "nextButton";
   let nextButton = document.createElement('button');
-  nextButton.classList.add('btn', 'btn-primary')
+  nextButton.classList.add('btn', 'btn-primary');
+  nextButton.setAttribute('id', 'Next');
   nextButton.onclick = assignNextTurn;
   let nextButtonText = document.createTextNode('Next');
   nextButton.appendChild(nextButtonText);
@@ -56,14 +61,27 @@ function changeParticipantsFontColor(participant) {
 function assignNextTurn() {
   const elements = document.getElementsByName("participant");
   const teammates = [...elements].filter(t => t.disabled === false && t.checked === true);
+  console.log(teammates.length);
+  let teammate = "";
   if (teammates.length === 0) return;
-  const i = Math.floor(Math.random() * teammates.length);
-  const teammate = teammates[i];
+  if (teammates.length > 1) {
+    const i = Math.floor(Math.random() * (teammates.length - 1));
+    teammate = teammates[i];
+  }
+  if (teammates.length === 1) {
+    teammate = teammates[0];
+  }
   const rightColumnDiv = document.getElementById("h3");
   rightColumnDiv.innerText = teammate.value;
   const teammateDiv = document.getElementById(teammate.id + "Div");
   teammateDiv.style = 'color:#b2b2b2;';
   teammate.disabled = true;
+  if (teammates.length === 1) {
+    let nextButton = document.getElementById("Next");
+    console.log(nextButton)
+    nextButton.classList.replace('btn-primary', 'btn-secondary');
+    nextButton.disabled = true;
+  }
 }
 
 displayParticipantNames(participants);
