@@ -12,11 +12,14 @@ function displayParticipantNames(participantNames) {
     input.id = element;
     input.name = "participant";
     input.value = element;
+    const MONDAY = 1;
     const TUESDAY = 2;
     const THURSDAY = 4;
     const date = new Date();
     const today = date.getDay();
-    if ((today !== THURSDAY && input.value === "Mahesh") || (today === TUESDAY && input.value === "Victoria")) {
+    if ((today !== MONDAY && input.value === "Mahesh") || 
+    (today === TUESDAY && input.value === "Victoria") || 
+    (today === THURSDAY && input.value === "Todd")) {
       input.checked = false;
       nameDiv.style = 'color:#b2b2b2;';
     } else {
