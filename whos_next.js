@@ -2,6 +2,17 @@
 
 let participants = ["Asaf", "Mariana", "Rachel", "Todd", "Victoria", "Vineet", "Mahesh"];
 
+function setupInitialLayout() {
+  let mainHeader = document.getElementById("mainHeader");
+  mainHeader.classList.add('text-primary');
+  let footerImg = document.getElementById("footer");
+  footerImg.src = "imgs/footer.png"
+}
+
+function chooseNewFooter() {
+  return "imgs/tony_stark_we_are_done.jpg";
+}
+
 function displayParticipantNames(participantNames) {
   let leftColDiv = document.getElementById("leftColumn");
   participantNames.forEach(element => {
@@ -86,7 +97,10 @@ function assignNextTurn() {
     let nextButton = document.getElementById("Next");
     nextButton.classList.replace('btn-primary', 'btn-secondary');
     nextButton.disabled = true;
+    let footerImg = document.getElementById("footer");
+    footerImg.src = chooseNewFooter();
   }
 }
 
+setupInitialLayout();
 displayParticipantNames(participants);
