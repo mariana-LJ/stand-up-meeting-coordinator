@@ -5,8 +5,30 @@ let participants = ["Asaf", "Mariana", "Rachel", "Todd", "Victoria", "Vineet", "
 function setupInitialLayout() {
   let mainHeader = document.getElementById("mainHeader");
   mainHeader.classList.add('text-primary');
+  
+  let nextButtonDiv = document.createElement('div');
+  nextButtonDiv.id = "nextButton";
+  let nextButton = document.createElement('button');
+  nextButton.classList.add('btn', 'btn-primary');
+  nextButton.setAttribute('id', 'Next');
+  nextButton.onclick = assignNextTurn;
+  let nextButtonText = document.createTextNode('Next');
+  nextButton.appendChild(nextButtonText);
+  nextButtonDiv.appendChild(nextButton);
+  document.getElementById("centerColumn").appendChild(nextButtonDiv);
+  
   let footerImg = document.getElementById("footer");
   footerImg.src = "imgs/footer.png"
+
+}
+
+function changeParticipantsFontColor(participant) {
+  const participantDiv = document.getElementById(participant.id + "Div");
+  if (participant.checked === true) {
+    participantDiv.style = 'color:#black;';
+  } else {
+    participantDiv.style = 'color:#b2b2b2;';
+  }
 }
 
 function chooseNewFooter() {
@@ -49,26 +71,6 @@ function displayParticipantNames(participantNames) {
     nameDiv.appendChild(label);
     leftColDiv.appendChild(nameDiv);
   });
-
-  let nextButtonDiv = document.createElement('div');
-  nextButtonDiv.id = "nextButton";
-  let nextButton = document.createElement('button');
-  nextButton.classList.add('btn', 'btn-primary');
-  nextButton.setAttribute('id', 'Next');
-  nextButton.onclick = assignNextTurn;
-  let nextButtonText = document.createTextNode('Next');
-  nextButton.appendChild(nextButtonText);
-  nextButtonDiv.appendChild(nextButton);
-  document.getElementById("centerColumn").appendChild(nextButtonDiv);
-}
-
-function changeParticipantsFontColor(participant) {
-  const participantDiv = document.getElementById(participant.id + "Div");
-  if (participant.checked === true) {
-    participantDiv.style = 'color:#black;';
-  } else {
-    participantDiv.style = 'color:#b2b2b2;';
-  }
 }
 
 function assignNextTurn() {
