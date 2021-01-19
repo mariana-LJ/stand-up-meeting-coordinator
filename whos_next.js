@@ -75,10 +75,24 @@ function displayParticipantNames(participantNames) {
 
 function assignNextTurn() {
   const elements = document.getElementsByName("participant");
-  const teammates = [...elements].filter(t => t.disabled === false && t.checked === true);
+  const teammates = [...elements].filter(t => t.checked === true && !(t.hasAttribute('done')));
+  const rightColumnDiv = document.getElementById("h3");
   const isMaheshPresent = teammates.filter(t => t.value === "Mahesh").length > 0;
   let teammate = "";
-  if (teammates.length === 0) return;
+  
+  if (teammates.length === 0) {
+    rightColumnDiv.innerText = "?";
+    let nextButton = document.getElementById("Next");
+    nextButton.classList.replace('btn-primary', 'btn-secondary');
+    nextButton.disabled = true;
+    let footerImg = document.getElementById("footer");
+    footerImg.src = chooseNewFooter();
+  }
+  
+  if (teammates.length === 1) {
+    teammate = teammates[0];
+  }
+
   if (teammates.length > 1) {
     let numParticipants = teammates.length;
     if (isMaheshPresent) {
@@ -87,20 +101,10 @@ function assignNextTurn() {
     const i = Math.floor(Math.random() * numParticipants);
     teammate = teammates[i];
   }
-  if (teammates.length === 1) {
-    teammate = teammates[0];
-  }
-  const rightColumnDiv = document.getElementById("h3");
-  rightColumnDiv.innerText = teammate.value;
-  const teammateDiv = document.getElementById(teammate.id + "Div");
-  teammateDiv.style = 'color:#b2b2b2;';
-  teammate.disabled = true;
-  if (teammates.length === 1) {
-    let nextButton = document.getElementById("Next");
-    nextButton.classList.replace('btn-primary', 'btn-secondary');
-    nextButton.disabled = true;
-    let footerImg = document.getElementById("footer");
-    footerImg.src = chooseNewFooter();
+  
+  if (typeof teammate.value !== 'undefined'){
+    rightColumnDiv.innerText = teammate.value;
+    teammate.setAttribute('done', 'done');
   }
 }
 
