@@ -18,7 +18,9 @@ function setupInitialLayout() {
   document.getElementById("centerColumn").appendChild(nextButtonDiv);
   
   let footerImg = document.getElementById("footer");
-  footerImg.src = "imgs/footer.png"
+  footerImg.src = "imgs/logo-energyblue-3000px.png"
+  footerImg.style.maxWidth = "30%";
+  footerImg.style.maxHeight = "30%";
 
 }
 
@@ -85,8 +87,11 @@ function assignNextTurn() {
     let nextButton = document.getElementById("Next");
     nextButton.classList.replace('btn-primary', 'btn-secondary');
     nextButton.disabled = true;
+    nextButton.textContent = "Done";
     let footerImg = document.getElementById("footer");
     footerImg.src = chooseNewFooter();
+    footerImg.style.maxHeight = "100%";
+    footerImg.style.maxWidth = "100%";
   }
   
   if (teammates.length === 1) {
