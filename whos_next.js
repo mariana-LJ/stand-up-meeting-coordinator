@@ -1,6 +1,10 @@
 'use strict'
 
 let participants = ["Asaf", "Mariana", "Rachel", "Todd", "Victoria", "Vineet", "Mahesh"];
+const MONDAY = 1;
+const TUESDAY = 2;
+const THURSDAY = 4;
+const today = new Date().getDay();
 
 function setupInitialLayout() {
   let mainHeader = document.getElementById("mainHeader");
@@ -36,8 +40,6 @@ function changeParticipantsFontColor(participant) {
 function chooseNewFooter() {
   const min = 1;
   let max = 9;
-  const today = new Date().getDay();
-  const THURSDAY = 4;
   let footer_name = "done";
   if (today === THURSDAY) {
     max = 7;
@@ -58,11 +60,6 @@ function displayParticipantNames(participantNames) {
     input.id = element;
     input.name = "participant";
     input.value = element;
-    const MONDAY = 1;
-    const TUESDAY = 2;
-    const THURSDAY = 4;
-    const date = new Date();
-    const today = date.getDay();
     if ((today !== MONDAY && input.value === "Mahesh") || 
     (today === TUESDAY && input.value === "Victoria") || 
     (today === THURSDAY && input.value === "Todd")) {
