@@ -34,7 +34,18 @@ function changeParticipantsFontColor(participant) {
 }
 
 function chooseNewFooter() {
-  return "imgs/tony_stark_we_are_done.jpg";
+  const min = 1;
+  let max = 9;
+  const today = new Date().getDay();
+  const THURSDAY = 4;
+  let footer_name = "done";
+  if (today === THURSDAY) {
+    max = 7;
+    footer_name = "tgif"
+  }
+  let index = Math.floor(Math.random() * (max - min) + min);
+
+  return "imgs/" + footer_name + "-" + index + ".jpg";
 }
 
 function displayParticipantNames(participantNames) {
