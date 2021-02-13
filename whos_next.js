@@ -97,9 +97,10 @@ function assignNextTurn() {
     nextButton.disabled = true;
     nextButton.textContent = "Done";
     let footerImg = document.getElementById("footer");
-    footerImg.src = chooseNewFooter();
+    footerImg.src = "";
     footerImg.style.maxHeight = "100%";
     footerImg.style.maxWidth = "100%";
+    footerImg.src = chooseNewFooter();
   }
   
   if (teammates.length === 1) {
