@@ -22,9 +22,9 @@ function setupInitialLayout() {
   document.getElementById("centerColumn").appendChild(nextButtonDiv);
   
   let footerImg = document.getElementById("footer");
-  footerImg.src = "imgs/logo-energyblue-3000px.png"
-  footerImg.style.maxWidth = "30%";
-  footerImg.style.maxHeight = "30%";
+  footerImg.src = "imgs/welcome.png"
+  footerImg.style.maxWidth = "60%";
+  footerImg.style.maxHeight = "60%";
 
 }
 
